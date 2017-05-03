@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ lugar.titulo }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <img [src]="lugar.imageUrl">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>{{ lugar.descricao }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <sebm-google-map
+          [latitude]="lugar.localizacao.lat"
+          [longitude]="lugar.localizacao.lng"
+          [zoom]="16">
+          <sebm-google-map-marker
+            [latitude]="lugar.localizacao.lat"
+            [longitude]="lugar.localizacao.lng"></sebm-google-map-marker>
+        </sebm-google-map>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button
+          ion-button
+          block
+          (click)="sai()">Sai</button>
+      </ion-col>
+      <ion-col>
+        <button
+          ion-button
+          block
+          color="danger"
+          (click)="remove()">Remove</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

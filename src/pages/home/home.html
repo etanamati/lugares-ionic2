@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only [navPush]="adicionaLugarPage">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Registro de Lugares
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngFor="let lugar of lugares; let i = index" (click)="abreLugar(lugar, i)">
+    <img [src]="lugar.imageUrl">
+    <ion-card-content text-center>
+      <ion-card-title>
+        {{ lugar.titulo }}
+      </ion-card-title>
+      <p>{{ lugar.descricao }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

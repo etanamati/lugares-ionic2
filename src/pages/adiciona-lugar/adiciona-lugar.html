@@ -1,0 +1,107 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Adiciona um lugar</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>Titulo</ion-label>
+        <ion-input
+          type="text"
+          placeholder="Bonita praça..."
+          name="titulo"
+          ngModel
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Descrição</ion-label>
+        <ion-textarea
+          name="descricao"
+          ngModel
+          required></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button
+            ion-button
+            block
+            outline
+            type="button"
+            icon-left
+            (click)="localiza()">
+            <ion-icon name="locate"></ion-icon>
+            Obtem Localização
+          </button>
+        </ion-col>
+        <ion-col>
+          <button
+            ion-button
+            block
+            outline
+            type="button"
+            icon-left
+            (click)="abreMapa()">
+            <ion-icon name="map"></ion-icon>
+            Seleciona no mapa
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="localizacaoIsSet">
+        <ion-col>
+          <sebm-google-map
+            [latitude]="localizacao.lat"
+            [longitude]="localizacao.lng"
+            [zoom]="16">
+            <sebm-google-map-marker
+              [latitude]="localizacao.lat"
+              [longitude]="localizacao.lng"></sebm-google-map-marker>
+          </sebm-google-map>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center>
+          <h5>Tira foto!</h5>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button
+            ion-button
+            icon-left
+            block
+            outline
+            type="button"
+            (click)="tiraFoto()">
+            <ion-icon name="camera"></ion-icon>
+            Abre camera
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="imageUrl != ''">
+        <ion-col>
+          <img [src]="imageUrl">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button
+            ion-button
+            color="secondary"
+            block
+            type="submit"
+            [disabled]="!f.valid || !localizacaoIsSet || imageUrl == ''">
+            Adiciona este lugar
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
